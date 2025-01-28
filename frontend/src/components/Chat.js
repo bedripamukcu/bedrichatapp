@@ -1,17 +1,36 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addMessage } from '../store/chatSlice';
+import { addMessage, setMessages } from '../store/chatSlice';
+import api from '../api'
+import { useEffect } from 'react';
+import io from 'socket.io-client';
+
+const socket = io('http://localhost:5000');
 
 const Chat = () => {
     const dispatch = useDispatch();
     const messages = useSelector((state) => state.chat.messages);
     const [input, setInput] = useState('');
 
-    const sendMessage = () => {
-        if (input.trim()) {
-            dispatch(addMessage({ text: input, sender: 'User' }));
-            setInput('');
+    useEffect(()=> {
+        socket.on('initialMessages', (existingMessages) =>{
+            dispatch(setMessages(existingMessages))
+        })
+        socket.on('newMessage', (newMessage) => {
+            dispatch(addMessage(newMessage))
+        })
+        return () => {
+            socket.off('initialMessages');
+            socket.off('newMessage');
         }
+    }, [dispatch])
+
+    const sendMessage = () => {
+       if (input.trim()) {
+        const newMessage = {text: input, sender: 'User'}
+        socket.emit('sendMessage', newMessage);
+        setInput('');
+       }
     };
 
     return (
