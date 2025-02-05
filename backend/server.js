@@ -23,10 +23,10 @@ io.on('connection', (socket) => {
     socket.emit('initialMessages',messages);
 
     socket.on('sendMessage', (newMessage) => {
-        messages.push(newMessage);
+    messages.push(newMessage);
     io.emit('newMessage', newMessage)})
     socket.on('disconnect', () => {
-        console.log('user disconnected');    
+    console.log('user disconnected');    
     })
     
 })
