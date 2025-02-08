@@ -1,11 +1,13 @@
 import React from 'react';
-import Chat from './components/Chat';  // Chat bileşenini import ediyoruz
-
+import Chat from './components/Chat';  
+import Login from './components/Login';
+import { useSelector } from 'react-redux';
 const App = () => {
+    const token = useSelector((state) => state.auth?.token || null);
     return (
         <div>
             <h1>Chat Application</h1>
-            <Chat />  {/* Chat bileşenini burada render ediyoruz */}
+            {token ? <Chat /> : <Login/> }  
         </div>
     );
 };

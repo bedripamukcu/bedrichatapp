@@ -10,5 +10,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));  // Use creat
 root.render(
     <Provider store={store}>
         <App />
-    </Provider>
+    </Provider>,
+      document.getElementById("root")
+
 );
