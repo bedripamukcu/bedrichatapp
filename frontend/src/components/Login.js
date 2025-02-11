@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { loginSuccess } from '../store/authSlice';
-
+import "./Login.css";
 const Auth = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -31,25 +31,27 @@ const Auth = () => {
     };
 
     return (
-        <div>
-            <h2>{isSignup ? 'Signup' : 'Login'}</h2>
-            <input 
-                type="text" 
-                placeholder="Username" 
-                value={username} 
-                onChange={(e) => setUsername(e.target.value)} 
+        <div className="auth-container">
+        <div className={`auth-box ${isSignup ? "signup-mode" : ""}`}>
+            <h2>{isSignup ? "Sign Up" : "Login"}</h2>
+            <input
+                type="text"
+                placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
             />
-            <input 
-                type="password" 
-                placeholder="Password" 
-                value={password} 
-                onChange={(e) => setPassword(e.target.value)} 
+            <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
             />
-            <button onClick={handleAuth}>{isSignup ? 'Signup' : 'Login'}</button>
-            <p onClick={() => setIsSignup(!isSignup)} style={{ cursor: 'pointer', color: 'blue' }}>
-                {isSignup ? 'Already have an account? Login' : "Don't have an account? Signup"}
+            <button onClick={handleAuth}>{isSignup ? "Sign Up" : "Login"}</button>
+            <p className="switch-text" onClick={() => setIsSignup(!isSignup)}>
+                {isSignup ? "Already have an account? Login" : "Don't have an account? Sign Up"}
             </p>
         </div>
+    </div>
     );
 };
 
