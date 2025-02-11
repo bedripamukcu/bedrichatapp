@@ -2,10 +2,12 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { loginSuccess } from '../store/authSlice';
 import "./Login.css";
+import { useNavigate } from 'react-router-dom';
 const Auth = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [isSignup, setIsSignup] = useState(false); 
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const handleAuth = async () => {
@@ -50,7 +52,10 @@ const Auth = () => {
             <p className="switch-text" onClick={() => setIsSignup(!isSignup)}>
                 {isSignup ? "Already have an account? Login" : "Don't have an account? Sign Up"}
             </p>
+            <button onClick={() => navigate('/reset-password/:token')} className="forgot-password-btn">
+            Forgot Password </button>
         </div>
+
     </div>
     );
 };
