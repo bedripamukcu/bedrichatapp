@@ -52,8 +52,8 @@ const Auth = () => {
             <p className="switch-text" onClick={() => setIsSignup(!isSignup)}>
                 {isSignup ? "Already have an account? Login" : "Don't have an account? Sign Up"}
             </p>
-            <button onClick={() => navigate('/reset-password/:token')} className="forgot-password-btn">
-            Forgot Password </button>
+            <p onClick={() => navigate('/reset-password/:token')} className="switch-text">
+            Forgot Password </p>
         </div>
 
     </div>
